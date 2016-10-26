@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func drawClick(_ sender: AnyObject) {
-        // self.view.removeFromSuperview()
+        print("text = \((tf_num.text!))")
         n = Int(tf_num.text!)!
         for rowIndex in 0..<n {
             for colIndex in 0..<n {
