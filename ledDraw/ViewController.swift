@@ -23,20 +23,38 @@ class ViewController: UIViewController {
                 v.removeFromSuperview()
             }
         }
-        print("text = \((tf_num.text!))")
-        n = Int(tf_num.text!)!
-        for rowIndex in 0..<n {
-            for colIndex in 0..<n {
+        if tf_num.text != "" {
+            print("text = \((tf_num.text!))")
+            n = Int(tf_num.text!)!
+            if n > 1 {
+                for rowIndex in 0..<n {
+                    for colIndex in 0..<n {
+                        let image = UIImage(named: "Image")
+                        let point = UIImageView(image: image)
+                        point.center = CGPoint(x: _margin + CGFloat(rowIndex) * spaceBetweenX(num: n), y: 2*_margin + CGFloat(colIndex) * spaceBetweenY(num: n))
+                        // point.tag = rowIndex*10 + colIndex + 100
+                        self.view.addSubview(point)
+                    }
+                }
+            } else if n == 1 {
                 let image = UIImage(named: "Image")
                 let point = UIImageView(image: image)
-                point.center = CGPoint(x: _margin + CGFloat(rowIndex) * spaceBetween(num: n), y: 2*_margin + CGFloat(colIndex) * spaceBetween(num: n))
+                point.center = CGPoint(x: self.view.bounds.size.width/2 , y: self.view.bounds.size.height/2)
                 self.view.addSubview(point)
+            } else {
+                print("try again")
             }
+            
+        } else {
+            print("input something")
         }
     }
-    func spaceBetween(num: Int) -> CGFloat {
+    func spaceBetweenX(num: Int) -> CGFloat {
         let space = (self.view.bounds.size.width - 2*_margin)/CGFloat(num-1)
-        print("space = \(space)")
+        return space
+    }
+    func spaceBetweenY(num: Int) -> CGFloat {
+        let space = (self.view.bounds.size.height - 3*_margin)/CGFloat(num-1)
         return space
     }
 }
